@@ -1,6 +1,6 @@
 import { ValidationBuilder as sut } from './validation-builder'
 import { RequiredFieldValidation, EmailValidation, MinLengthValidation } from '@/validation/validators'
-import faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 describe('ValidationBuilder', () => {
   test('should return RequiredFieldValidation', () => {
