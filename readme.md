@@ -1,1 +1,2 @@
 [![Build Status](https://app.travis-ci.com/sSahli232/clean-react.svg?branch=master)](https://app.travis-ci.com/sSahli232/clean-react)
+[![Coverage Status](https://coveralls.io/repos/github/sSahli232/clean-react/badge.svg?branch=master)](https://coveralls.io/github/sSahli232/clean-react?branch=master)
