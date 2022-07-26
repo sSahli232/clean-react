@@ -6,6 +6,7 @@ import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-libr
 import { Login } from '@/presentation/pages'
 import { AuthenticationSpy, SaveAccessTokenMock, ValidationStub } from '@/presentation/test'
 import { InvalidCredentialsError } from '@/domain/errors'
+import { act } from 'react-dom/test-utils'
 
 type SutTypes = {
   sut: RenderResult
@@ -174,6 +175,17 @@ describe('Login Component', () => {
     sut.getByTestId('form')
     expect(saveAcessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken)
     expect(history.location.pathname).toBe('/')
+  })
+
+  test('should present error if SaveAccessToken fails', async () => {
+    const { sut, saveAcessTokenMock } = makeSut()
+    const error = new InvalidCredentialsError()
+    jest.spyOn(saveAcessTokenMock, 'save').mockReturnValueOnce(Promise.reject(error))
+    await simulateValidSubmit(sut)
+    await waitFor(() => {
+      testElementText(sut, 'main-error', error.message)
+      testErrorWrapChildCount(sut, 1)
+    })
   })
 
   test('should go to signup page', () => {
